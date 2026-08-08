@@ -2241,33 +2241,48 @@ $MESSAGES_DEFAUT = [
     'nl' => 'Proficiat, je eindigt <b>{rang}</b> in de ranking! Je beloning wordt klaargemaakt — je krijgt een mail zodra je ze mag komen ophalen.'],
 
   // ── ✉️ Mail « on prépare », version podium ────────────────────────────
+  // 🇧🇪 Les mails partent en FRANÇAIS PUIS EN NÉERLANDAIS, dans le même envoi :
+  // on ne connaît pas la langue de chaque personne (la base ne la stocke pas),
+  // et un mail de félicitations qu'on ne comprend pas ne félicite personne.
   'mail_podium_sujet' => ['groupe' => '✉️ Mail — podium', 'libelle' => 'Objet du mail',
-    'fr' => '🏆 Bravo — on prépare ta récompense !', 'nl' => null],
+    'fr' => '🏆 Bravo — on prépare ta récompense !',
+    'nl' => '🏆 Proficiat — we maken je beloning klaar!'],
   'mail_podium_corps' => ['groupe' => '✉️ Mail — podium', 'libelle' => 'Message', 'lignes' => true, 'trous' => '{place}',
     'fr' => "L'équipe Famiformation te félicite pour ta <b>{place}</b> au grand quiz&nbsp;! 🏆\n"
-          . "On <b>prépare ta récompense</b>. Nous t'enverrons un mail une fois que tu pourras venir la chercher.", 'nl' => null],
+          . "On <b>prépare ta récompense</b>. Nous t'enverrons un mail une fois que tu pourras venir la chercher.",
+    'nl' => "Het Famiformation-team feliciteert je met je <b>{place}</b> in de grote quiz&nbsp;! 🏆\n"
+          . "We <b>maken je beloning klaar</b>. Je krijgt een mail zodra je ze mag komen ophalen."],
 
   // ── ✉️ Mail « on prépare », version jardin ────────────────────────────
   'mail_jardin_sujet' => ['groupe' => '✉️ Mail — jardin terminé', 'libelle' => 'Objet du mail',
-    'fr' => '🌼 Bravo — on prépare ta récompense !', 'nl' => null],
+    'fr' => '🌼 Bravo — on prépare ta récompense !',
+    'nl' => '🌼 Proficiat — we maken je beloning klaar!'],
   'mail_jardin_corps' => ['groupe' => '✉️ Mail — jardin terminé', 'libelle' => 'Message', 'lignes' => true,
     'fr' => "L'équipe Famiformation te félicite pour avoir <b>terminé ton jardin</b>&nbsp;! 🌼\n"
-          . "On <b>prépare ta récompense</b>. Nous t'enverrons un mail une fois que tu pourras venir la chercher.", 'nl' => null],
+          . "On <b>prépare ta récompense</b>. Nous t'enverrons un mail une fois que tu pourras venir la chercher.",
+    'nl' => "Het Famiformation-team feliciteert je omdat je <b>je tuin hebt afgewerkt</b>&nbsp;! 🌼\n"
+          . "We <b>maken je beloning klaar</b>. Je krijgt een mail zodra je ze mag komen ophalen."],
 
   // ── ✉️ Mail « c'est prêt », envoyé par les RH ─────────────────────────
   // Deux versions, comme pour « on prépare » : quelqu'un peut être sur le
   // podium ET avoir terminé son jardin. Il recevra alors deux mails, et doit
   // pouvoir dire lequel concerne quoi.
   'mail_prete_podium_sujet' => ['groupe' => "✉️ Mail — podium : c'est prêt", 'libelle' => 'Objet du mail',
-    'fr' => '🏆 Ta récompense du podium est prête !', 'nl' => null],
+    'fr' => '🏆 Ta récompense du podium est prête !',
+    'nl' => '🏆 Je podiumbeloning ligt klaar!'],
   'mail_prete_podium_corps' => ['groupe' => "✉️ Mail — podium : c'est prêt", 'libelle' => 'Message', 'lignes' => true,
     'fr' => "Bonne nouvelle : <b>ta récompense du podium est prête</b>&nbsp;! 🏆\n"
-          . "Pour la récupérer, présente-toi <b>auprès des RH</b> du magasin.", 'nl' => null],
+          . "Pour la récupérer, présente-toi <b>auprès des RH</b> du magasin.",
+    'nl' => "Goed nieuws: <b>je podiumbeloning ligt klaar</b>&nbsp;! 🏆\n"
+          . "Meld je aan <b>bij de HR-dienst</b> van de winkel om ze op te halen."],
   'mail_prete_jardin_sujet' => ['groupe' => "✉️ Mail — jardin : c'est prêt", 'libelle' => 'Objet du mail',
-    'fr' => '🌼 Ta récompense du jardin est prête !', 'nl' => null],
+    'fr' => '🌼 Ta récompense du jardin est prête !',
+    'nl' => '🌼 Je tuinbeloning ligt klaar!'],
   'mail_prete_jardin_corps' => ['groupe' => "✉️ Mail — jardin : c'est prêt", 'libelle' => 'Message', 'lignes' => true,
     'fr' => "Bonne nouvelle : <b>ta récompense pour ton jardin terminé est prête</b>&nbsp;! 🌼\n"
-          . "Pour la récupérer, présente-toi <b>auprès des RH</b> du magasin.", 'nl' => null],
+          . "Pour la récupérer, présente-toi <b>auprès des RH</b> du magasin.",
+    'nl' => "Goed nieuws: <b>je beloning voor je afgewerkte tuin ligt klaar</b>&nbsp;! 🌼\n"
+          . "Meld je aan <b>bij de HR-dienst</b> van de winkel om ze op te halen."],
 
   // Les MODALITÉS (le « Comment ça marche ») ne sont volontairement PAS ici :
   // ce sont les règles du jeu, pas un message de félicitations. Les mettre à
@@ -2329,14 +2344,22 @@ function mailRecompense(PDO $db, $cle, $info, $modele = 'attente', $origine = 'a
     // 1️⃣ ON PRÉPARE. Envoyé dès que la personne devient gagnante : on félicite,
     // on annonce qu'un second mail suivra. Sans ça, quelqu'un qui gagne le
     // 20/08 n'entendait plus parler de rien jusqu'au 01/09.
-    $sujet = msgTexte($estPodium ? 'mail_podium_sujet' : 'mail_jardin_sujet');
-    $corps = msgTexte($estPodium ? 'mail_podium_corps' : 'mail_jardin_corps', 'fr', ['place' => $place]);
+    $cleSujet = $estPodium ? 'mail_podium_sujet' : 'mail_jardin_sujet';
+    $cleCorps = $estPodium ? 'mail_podium_corps' : 'mail_jardin_corps';
+    $sujet   = msgTexte($cleSujet, 'fr');
+    $sujetNl = msgTexte($cleSujet, 'nl');
+    $corps   = msgTexte($cleCorps, 'fr', ['place' => $place]);
+    $corpsNl = msgTexte($cleCorps, 'nl', ['place' => $place]);
   } else {
     // 2️⃣ C'EST PRÊT. Envoyé par les RH le jour où la récompense est disponible.
     // Plus de rappel du classement ici : à ce stade la seule information utile,
     // c'est qu'elle est prête et où la chercher.
-    $sujet = msgTexte($estPodium ? 'mail_prete_podium_sujet' : 'mail_prete_jardin_sujet');
-    $corps = msgTexte($estPodium ? 'mail_prete_podium_corps' : 'mail_prete_jardin_corps');
+    $cleSujet = $estPodium ? 'mail_prete_podium_sujet' : 'mail_prete_jardin_sujet';
+    $cleCorps = $estPodium ? 'mail_prete_podium_corps' : 'mail_prete_jardin_corps';
+    $sujet   = msgTexte($cleSujet, 'fr');
+    $sujetNl = msgTexte($cleSujet, 'nl');
+    $corps   = msgTexte($cleCorps, 'fr');
+    $corpsNl = msgTexte($cleCorps, 'nl');
 
     // 🎟️ LE BON CADEAU NE CONCERNE QUE LE JARDIN TERMINÉ.
     //
@@ -2368,11 +2391,30 @@ function mailRecompense(PDO $db, $cle, $info, $modele = 'attente', $origine = 'a
 
   // Une ligne du message = un paragraphe. Les lignes vides sont ignorées, pour
   // qu'un retour à la ligne en trop ne fabrique pas un blanc dans le mail.
-  $paragraphes = '';
-  foreach (preg_split('/\R/u', $corps) as $i => $ligne) {
-    $ligne = trim($ligne);
-    if ($ligne === '') { continue; }
-    $paragraphes .= '<p style="font-size:16px;line-height:1.6;">' . $ligne . '</p>';
+  $enParagraphes = function ($texte) {
+    $out = '';
+    foreach (preg_split('/\R/u', (string) $texte) as $ligne) {
+      $ligne = trim($ligne);
+      if ($ligne === '') { continue; }
+      $out .= '<p style="font-size:16px;line-height:1.6;">' . $ligne . '</p>';
+    }
+    return $out;
+  };
+  $paragraphes = $enParagraphes($corps);
+
+  // 🇧🇪 La version néerlandaise, dans le MÊME mail. On ne connaît pas la langue
+  // de chaque personne (la base ne la stocke pas) : envoyer deux mails séparés
+  // reviendrait à en envoyer un de trop, ou le mauvais. Si la traduction est
+  // vide — un magasin a pu effacer le champ NL depuis l'admin — on n'ajoute
+  // rien plutôt qu'un séparateur suivi du blanc.
+  $blocNl = '';
+  $parasNl = $enParagraphes($corpsNl);
+  if (trim($parasNl) !== '' && trim($corpsNl) !== trim($corps)) {
+    $blocNl =
+      '<div style="border-top:2px dashed #d6dfd8;margin:26px 0 6px;"></div>'
+      . '<p style="font-size:13px;font-weight:bold;color:#617268;letter-spacing:1px;margin:0 0 10px;">🇳🇱 NEDERLANDS</p>'
+      . '<p style="font-size:16px;">Hallo ' . htmlspecialchars($bonjour, ENT_QUOTES, 'UTF-8') . ',</p>'
+      . $parasNl;
   }
 
   // 🎟️ LE BON CADEAU. Le code est écrit EN TOUTES LETTRES en plus du
@@ -2388,23 +2430,36 @@ function mailRecompense(PDO $db, $cle, $info, $modele = 'attente', $origine = 'a
     $bar = (string) $codeRecompense['barcode'];
     $blocCode =
       '<div style="margin:24px 0;padding:20px;border:2px dashed #d6a21a;border-radius:14px;background:#fffbf0;text-align:center;">'
-      . '<div style="font-size:13px;font-weight:bold;color:#8a6d1a;letter-spacing:.06em;text-transform:uppercase;">Ton bon cadeau</div>'
+      . '<div style="font-size:13px;font-weight:bold;color:#8a6d1a;letter-spacing:.06em;text-transform:uppercase;">Ton bon cadeau&nbsp;· Jouw cadeaubon</div>'
       . '<div style="margin:8px 0 4px;font-size:19px;font-weight:bold;color:#244230;">🍬 Une boîte Fun chez Lollyland</div>'
       . '<div style="font-size:14px;color:#8a6d1a;">d\'une valeur de 5&nbsp;€, offerte par la maison</div>'
+      . '<div style="margin-top:6px;font-size:17px;font-weight:bold;color:#244230;">🍬 Een Fun-box bij Lollyland</div>'
+      . '<div style="font-size:14px;color:#8a6d1a;">ter waarde van 5&nbsp;€, aangeboden door het huis</div>'
       . '<div style="margin:14px 0 6px;"><img src="' . htmlspecialchars(recompenseUrlCodeBarre($bar), ENT_QUOTES, 'UTF-8')
       . '" alt="' . htmlspecialchars($bar, ENT_QUOTES, 'UTF-8') . '" width="300" style="max-width:100%;height:auto;"></div>'
       . '<div style="font-family:monospace;font-size:19px;font-weight:bold;color:#244230;letter-spacing:.04em;">'
       . htmlspecialchars($bar, ENT_QUOTES, 'UTF-8') . '</div>'
-      . '<div style="margin-top:10px;font-size:13px;color:#617268;">Présente ce code en caisse. Il est personnel et utilisable une seule fois.</div>'
+      . '<div style="margin-top:10px;font-size:13px;color:#617268;">Présente ce code en caisse. Il est personnel et utilisable une seule fois.<br>'
+      . 'Toon deze code aan de kassa. Hij is persoonlijk en één keer bruikbaar.</div>'
       . '</div>';
   }
 
+  // 🎟️ Le bon cadeau est placé APRÈS les deux langues : il est unique, et le
+  // répéter donnerait l'impression d'avoir reçu deux bons.
   $body = '<div style="font-family:Arial,sans-serif;color:#244230;max-width:560px;margin:0 auto;padding:24px;">'
     . '<p style="font-size:16px;">Bonjour ' . htmlspecialchars($bonjour, ENT_QUOTES, 'UTF-8') . ',</p>'
     . $paragraphes
+    . $blocNl
     . $blocCode
-    . '<p style="font-size:16px;line-height:1.6;">Une question&nbsp;? Écris à <a href="mailto:admin@famiformation.com">admin@famiformation.com</a>.</p>'
-    . '<p style="font-size:15px;color:#617268;">Merci d\'avoir joué, et à bientôt&nbsp;! 🌱<br>L\'équipe Famiflora · Famiformation</p></div>';
+    . '<p style="font-size:16px;line-height:1.6;">Une question&nbsp;? Écris à <a href="mailto:admin@famiformation.com">admin@famiformation.com</a>.<br>'
+    . 'Een vraag&nbsp;? Mail naar <a href="mailto:admin@famiformation.com">admin@famiformation.com</a>.</p>'
+    . '<p style="font-size:15px;color:#617268;">Merci d\'avoir joué, et à bientôt&nbsp;! 🌱 · Bedankt om mee te spelen, tot binnenkort&nbsp;! 🌱<br>L\'équipe Famiflora · Famiformation</p></div>';
+
+  // L'OBJET aussi porte les deux langues, séparées par «&nbsp;·&nbsp;» : c'est
+  // la seule ligne visible avant d'ouvrir, elle doit parler à tout le monde.
+  if (trim((string) $sujetNl) !== '' && trim((string) $sujetNl) !== trim((string) $sujet)) {
+    $sujet = $sujet . ' · ' . $sujetNl;
+  }
   $ok = function_exists('sendMail') ? sendMail($email, $sujet, $body, true) : false;
   // Tracé ICI, donc pour TOUS les envois — automatiques comme manuels, et
   // séparément selon qu'il s'agit du podium ou du jardin.
