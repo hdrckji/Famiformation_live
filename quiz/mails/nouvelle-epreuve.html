@@ -1,35 +1,59 @@
 <!doctype html>
-<html lang="fr">
+<html lang="fr" xmlns:v="urn:schemas-microsoft-com:vml" xmlns:o="urn:schemas-microsoft-com:office:office">
 <head>
 <meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width,initial-scale=1">
 <meta name="robots" content="noindex,nofollow">
 <title>Mail — Nouvelle épreuve (Mouscron)</title>
+<!--[if mso]>
+<xml><o:OfficeDocumentSettings><o:PixelsPerInch>96</o:PixelsPerInch></o:OfficeDocumentSettings></xml>
+<style>
+  /* Outlook (Windows) rend le HTML avec le moteur de Word : il ignore les
+     polices web et calcule mal les interlignes. On lui impose donc Arial et
+     un interligne exact, sinon le texte se tasse. */
+  table, td, div, p, a { font-family: Arial, Helvetica, sans-serif !important; mso-line-height-rule: exactly; }
+</style>
+<![endif]-->
 </head>
-<body style="margin:0;padding:0;background:#EAF4EC;">
+<body style="margin:0;padding:0;background-color:#EAF4EC;">
 <!-- ============================================================
      MAIL « NOUVELLE ÉPREUVE » — MOUSCRON
      Bilingue FR puis NL dans UN SEUL envoi : la liste de diffusion ne connaît
      pas la langue de chacun, et deux mails séparés doubleraient le risque
      qu'une personne reçoive la mauvaise version.
-     Mise en page en tableaux et styles en ligne : c'est la seule chose que
-     tous les clients mail savent lire (Outlook ignore une grande partie du
-     CSS moderne, et Gmail supprime les balises <style>).
+
+     ⚠️ CONTRAINTES OUTLOOK, qui expliquent la mise en page :
+       • tout est en TABLEAUX et en styles EN LIGNE — Outlook supprime les
+         blocs <style> et ignore une bonne partie du CSS moderne ;
+       • pas de marge négative : Outlook ne les applique pas (le séparateur
+         « NEDERLANDS » est donc en deux lignes de tableau, pas en superposition) ;
+       • largeur fixée par l'attribut width= ET par un bloc conditionnel MSO :
+         Outlook ignore max-width ;
+       • les angles arrondis n'existent pas sous Outlook : les blocs y seront
+         carrés, c'est voulu et sans conséquence ;
+       • aucune image, donc rien à débloquer pour lire le message.
      ============================================================ -->
 
-<table role="presentation" width="100%" cellpadding="0" cellspacing="0" border="0" style="background:#EAF4EC;">
+<!-- Aperçu affiché dans la liste des messages, avant ouverture. -->
+<div style="display:none;font-size:1px;color:#EAF4EC;line-height:1px;max-height:0;max-width:0;opacity:0;overflow:hidden;">
+  Une nouvelle épreuve est ouverte — le podium peut encore basculer ! · Er staat een nieuwe proef open!
+</div>
+
+<table role="presentation" width="100%" cellpadding="0" cellspacing="0" border="0" style="border-collapse:collapse;background-color:#EAF4EC;">
 <tr><td align="center" style="padding:24px 12px;">
 
-<table role="presentation" width="560" cellpadding="0" cellspacing="0" border="0"
-       style="max-width:560px;width:100%;background:#ffffff;border-radius:18px;overflow:hidden;font-family:Arial,Helvetica,sans-serif;color:#244230;">
+<!--[if mso]><table role="presentation" width="560" cellpadding="0" cellspacing="0" border="0" align="center"><tr><td><![endif]-->
+<table role="presentation" width="560" cellpadding="0" cellspacing="0" border="0" align="center"
+       style="border-collapse:collapse;max-width:560px;width:100%;background-color:#ffffff;font-family:Arial,Helvetica,sans-serif;color:#244230;">
 
   <!-- Bandeau -->
-  <tr><td style="background:#1E7A46;padding:26px 24px;text-align:center;">
-    <div style="font-size:34px;line-height:1;">🏆🌻</div>
-    <div style="font-size:23px;font-weight:bold;color:#ffffff;margin-top:8px;line-height:1.25;">
+  <tr><td align="center" style="background-color:#1E7A46;padding:26px 24px;">
+    <div style="font-size:34px;line-height:36px;">🏆🌻</div>
+    <div style="font-size:23px;line-height:29px;font-weight:bold;color:#ffffff;padding-top:8px;">
       Une nouvelle épreuve est ouverte&nbsp;!
     </div>
-    <div style="font-size:15px;color:#CDEBD8;margin-top:6px;">
+    <div style="font-size:15px;line-height:21px;color:#CDEBD8;padding-top:6px;">
       Le podium peut encore basculer 😏
     </div>
   </td></tr>
@@ -37,43 +61,62 @@
   <!-- ---------------- FRANÇAIS ---------------- -->
   <tr><td style="padding:26px 24px 6px;">
 
-    <p style="font-size:17px;line-height:1.6;margin:0 0 16px;">
+    <p style="font-size:17px;line-height:26px;margin:0 0 16px;">
       Après une <b>bataille épique</b> à travers le quiz, place à la revanche&nbsp;!
     </p>
 
-    <p style="font-size:16px;line-height:1.6;margin:0 0 18px;">
+    <p style="font-size:16px;line-height:26px;margin:0 0 18px;">
       Tu n'es pas encore sur le podium&nbsp;? Voilà ta chance de <b>regrimper</b>.
       Tu y es déjà&nbsp;? Méfie-toi… ça va sérieusement bouger derrière toi&nbsp;😅
     </p>
 
-    <table role="presentation" width="100%" cellpadding="0" cellspacing="0" border="0"
-           style="background:#F3FAF5;border-radius:14px;border-left:5px solid #1E7A46;margin:0 0 18px;">
-      <tr><td style="padding:16px 18px;">
-        <div style="font-size:18px;font-weight:bold;margin-bottom:6px;">🏷️ Le Juste Prix</div>
-        <div style="font-size:15px;line-height:1.6;">
-          10 articles du magasin, un prix à deviner à chaque fois.
-          Plus tu tombes juste, plus tu marques&nbsp;— avec des <b>bonus de rapidité</b>
-          et de <b>série</b> pour ceux qui enchaînent. Tu découvriras au passage
-          ce qui se vend vraiment chez nous&nbsp;!
-        </div>
-      </td></tr>
+    <!-- L'épreuve -->
+    <table role="presentation" width="100%" cellpadding="0" cellspacing="0" border="0" style="border-collapse:collapse;margin:0 0 18px;">
+      <tr>
+        <td width="5" style="background-color:#1E7A46;font-size:0;line-height:0;">&nbsp;</td>
+        <td style="background-color:#F3FAF5;padding:16px 18px;">
+          <div style="font-size:18px;line-height:24px;font-weight:bold;padding-bottom:6px;">🏷️ Le Juste Prix</div>
+          <div style="font-size:15px;line-height:24px;">
+            10 articles du magasin, un prix à deviner à chaque fois.
+            Plus tu tombes juste, plus tu marques&nbsp;— avec des <b>bonus de rapidité</b>
+            et de <b>série</b> pour ceux qui enchaînent. Tu découvriras au passage
+            ce qui se vend vraiment chez nous&nbsp;!
+          </div>
+        </td>
+      </tr>
     </table>
 
-    <p style="font-size:16px;line-height:1.6;margin:0 0 8px;">
+    <!-- 🙋 Rappel pour ceux qui n'ont pas encore commencé -->
+    <table role="presentation" width="100%" cellpadding="0" cellspacing="0" border="0" style="border-collapse:collapse;margin:0 0 18px;">
+      <tr>
+        <td width="5" style="background-color:#E9A93C;font-size:0;line-height:0;">&nbsp;</td>
+        <td style="background-color:#FFF8EA;padding:16px 18px;">
+          <div style="font-size:17px;line-height:24px;font-weight:bold;padding-bottom:6px;">🙋 Tu n'as pas encore fait le quiz&nbsp;?</div>
+          <div style="font-size:15px;line-height:24px;">
+            <b>C'est le moment de commencer&nbsp;!</b> Rien n'est perdu&nbsp;: les épreuves
+            passées restent ouvertes, tu peux donc <b>toutes les enchaîner</b> et te
+            retrouver dans la course en une soirée. Il suffit de les faire
+            <b>dans l'ordre</b>&nbsp;— le quiz d'abord, et la suite se débloque.
+          </div>
+        </td>
+      </tr>
+    </table>
+
+    <p style="font-size:16px;line-height:26px;margin:0 0 8px;">
       <b>📅 Et ce n'est que le début.</b><br>
       Une <b>nouvelle épreuve chaque semaine</b>, jusqu'au <b>27 août</b>.
       <b>5 au total</b>&nbsp;: le quiz, le Juste Prix… et <b>3 surprises</b>
       qu'on ne va évidemment pas dévoiler d'un coup 😉
     </p>
 
-    <p style="font-size:16px;line-height:1.6;margin:16px 0 8px;">
+    <p style="font-size:16px;line-height:26px;margin:16px 0 8px;">
       <b>🌱 Chaque point compte double.</b><br>
       Les points de <b>toutes les épreuves</b> nourrissent ton <b>classement</b>
       <u>et</u> ton <b>jardin</b>. Autrement dit&nbsp;: jouer te fait grimper au
       podium <i>et</i> pousser ton jardin en même temps.
     </p>
 
-    <p style="font-size:16px;line-height:1.6;margin:16px 0 8px;">
+    <p style="font-size:16px;line-height:26px;margin:16px 0 8px;">
       <b>👀 Reste bien concentré&nbsp;!</b><br>
       Les prochaines épreuves arrivent vite, et une info peut se glisser
       n'importe où. Garde un œil sur <b>tes mails</b> et sur ton
@@ -81,122 +124,141 @@
       passer devant.
     </p>
 
-    <p style="font-size:16px;line-height:1.6;margin:16px 0 22px;">
+    <p style="font-size:16px;line-height:26px;margin:16px 0 22px;">
       <b>📖 Tout le programme</b>&nbsp;— dates, règles, ce qui rapporte quoi&nbsp;—
       se trouve dans la rubrique <b>«&nbsp;Modalité des épreuves&nbsp;»</b>,
       juste sous les trois modules de ton espace jardin.
     </p>
 
-    <table role="presentation" cellpadding="0" cellspacing="0" border="0" align="center" style="margin:0 auto 6px;">
-      <tr><td style="background:#1E7A46;border-radius:999px;">
+    <table role="presentation" cellpadding="0" cellspacing="0" border="0" align="center" style="border-collapse:collapse;margin:0 auto;">
+      <tr><td align="center" bgcolor="#1E7A46" style="background-color:#1E7A46;padding:15px 34px;">
         <a href="https://www.famiformation.com/quiz/mouscron"
-           style="display:inline-block;padding:15px 34px;font-size:17px;font-weight:bold;color:#ffffff;text-decoration:none;">
+           style="font-size:17px;line-height:20px;font-weight:bold;color:#ffffff;text-decoration:none;display:inline-block;">
           Je relève le défi&nbsp;🚀
         </a>
       </td></tr>
     </table>
 
-    <p style="font-size:15px;line-height:1.6;margin:18px 0 0;text-align:center;color:#617268;">
+    <p style="font-size:15px;line-height:24px;margin:18px 0 0;text-align:center;color:#617268;">
       Bonne chance&nbsp;— et que le meilleur jardinier gagne&nbsp;! 🌻
     </p>
 
   </td></tr>
 
-  <!-- Séparateur -->
+  <!-- Séparateur. En DEUX lignes de tableau : la version « trait barré par un
+       libellé » demandait une marge négative, qu'Outlook n'applique pas. -->
   <tr><td style="padding:22px 24px 0;">
-    <div style="border-top:2px dashed #CDDCD2;"></div>
-    <div style="text-align:center;margin-top:-13px;">
-      <span style="background:#ffffff;padding:0 12px;font-size:13px;font-weight:bold;color:#617268;letter-spacing:.08em;">
-        🇳🇱 NEDERLANDS
-      </span>
-    </div>
+    <table role="presentation" width="100%" cellpadding="0" cellspacing="0" border="0" style="border-collapse:collapse;">
+      <tr><td height="2" style="background-color:#CDDCD2;font-size:0;line-height:0;">&nbsp;</td></tr>
+    </table>
+  </td></tr>
+  <tr><td align="center" style="padding:12px 24px 0;">
+    <span style="font-size:13px;line-height:18px;font-weight:bold;color:#617268;letter-spacing:1px;">🇳🇱&nbsp;NEDERLANDS</span>
   </td></tr>
 
   <!-- ---------------- NEDERLANDS ---------------- -->
-  <tr><td style="padding:16px 24px 26px;">
+  <tr><td style="padding:14px 24px 26px;">
 
-    <div style="font-size:21px;font-weight:bold;line-height:1.3;margin:0 0 14px;">
+    <div style="font-size:21px;line-height:27px;font-weight:bold;padding-bottom:14px;">
       Er staat een nieuwe proef open&nbsp;! 🏆
     </div>
 
-    <p style="font-size:17px;line-height:1.6;margin:0 0 16px;">
+    <p style="font-size:17px;line-height:26px;margin:0 0 16px;">
       Na een <b>epische veldslag</b> door de quiz is het tijd voor revanche&nbsp;!
     </p>
 
-    <p style="font-size:16px;line-height:1.6;margin:0 0 18px;">
+    <p style="font-size:16px;line-height:26px;margin:0 0 18px;">
       Sta je nog niet op het podium&nbsp;? Dit is je kans om te <b>klimmen</b>.
       Sta je er al op&nbsp;? Kijk maar uit… achter je wordt het druk&nbsp;😅
     </p>
 
-    <table role="presentation" width="100%" cellpadding="0" cellspacing="0" border="0"
-           style="background:#F3FAF5;border-radius:14px;border-left:5px solid #1E7A46;margin:0 0 18px;">
-      <tr><td style="padding:16px 18px;">
-        <div style="font-size:18px;font-weight:bold;margin-bottom:6px;">🏷️ De Juiste Prijs</div>
-        <div style="font-size:15px;line-height:1.6;">
-          10 artikelen uit de winkel, telkens één prijs om te raden.
-          Hoe dichter je zit, hoe meer je scoort&nbsp;— met een
-          <b>snelheidsbonus</b> en een <b>reeksbonus</b> voor wie doorgaat.
-          En je ontdekt meteen wat er bij ons écht over de toonbank gaat&nbsp;!
-        </div>
-      </td></tr>
+    <table role="presentation" width="100%" cellpadding="0" cellspacing="0" border="0" style="border-collapse:collapse;margin:0 0 18px;">
+      <tr>
+        <td width="5" style="background-color:#1E7A46;font-size:0;line-height:0;">&nbsp;</td>
+        <td style="background-color:#F3FAF5;padding:16px 18px;">
+          <div style="font-size:18px;line-height:24px;font-weight:bold;padding-bottom:6px;">🏷️ De Juiste Prijs</div>
+          <div style="font-size:15px;line-height:24px;">
+            10 artikelen uit de winkel, telkens één prijs om te raden.
+            Hoe dichter je zit, hoe meer je scoort&nbsp;— met een
+            <b>snelheidsbonus</b> en een <b>reeksbonus</b> voor wie doorgaat.
+            En je ontdekt meteen wat er bij ons écht over de toonbank gaat&nbsp;!
+          </div>
+        </td>
+      </tr>
     </table>
 
-    <p style="font-size:16px;line-height:1.6;margin:0 0 8px;">
+    <table role="presentation" width="100%" cellpadding="0" cellspacing="0" border="0" style="border-collapse:collapse;margin:0 0 18px;">
+      <tr>
+        <td width="5" style="background-color:#E9A93C;font-size:0;line-height:0;">&nbsp;</td>
+        <td style="background-color:#FFF8EA;padding:16px 18px;">
+          <div style="font-size:17px;line-height:24px;font-weight:bold;padding-bottom:6px;">🙋 Heb je de quiz nog niet gedaan&nbsp;?</div>
+          <div style="font-size:15px;line-height:24px;">
+            <b>Dit is hét moment om te starten&nbsp;!</b> Er gaat niets verloren&nbsp;:
+            voorbije proeven blijven open, dus je kan ze <b>allemaal na elkaar</b>
+            doen en op één avond weer helemaal mee zijn. Je doet ze gewoon
+            <b>in volgorde</b>&nbsp;— eerst de quiz, en de rest gaat open.
+          </div>
+        </td>
+      </tr>
+    </table>
+
+    <p style="font-size:16px;line-height:26px;margin:0 0 8px;">
       <b>📅 En dit is nog maar het begin.</b><br>
       <b>Elke week een nieuwe proef</b>, tot <b>27 augustus</b>.
       <b>5 in totaal</b>&nbsp;: de quiz, de Juiste Prijs… en <b>3 verrassingen</b>
       die we uiteraard niet in één keer verklappen 😉
     </p>
 
-    <p style="font-size:16px;line-height:1.6;margin:16px 0 8px;">
+    <p style="font-size:16px;line-height:26px;margin:16px 0 8px;">
       <b>🌱 Elk punt telt dubbel.</b><br>
       De punten van <b>alle proeven</b> voeden je <b>ranking</b> <u>én</u> je
       <b>tuin</b>. Spelen doet je dus tegelijk stijgen op het podium <i>en</i>
       je tuin groeien.
     </p>
 
-    <p style="font-size:16px;line-height:1.6;margin:16px 0 8px;">
+    <p style="font-size:16px;line-height:26px;margin:16px 0 8px;">
       <b>👀 Blijf goed opletten&nbsp;!</b><br>
       De volgende proeven komen er snel aan, en een tip kan overal opduiken.
       Hou <b>je mailbox</b> en <b>je tuin</b> in de gaten&nbsp;— het zou zonde
       zijn net die ene proef te missen die je vooruit helpt.
     </p>
 
-    <p style="font-size:16px;line-height:1.6;margin:16px 0 22px;">
+    <p style="font-size:16px;line-height:26px;margin:16px 0 22px;">
       <b>📖 Het volledige programma</b>&nbsp;— data, regels, wat wat oplevert&nbsp;—
       vind je onder <b>«&nbsp;Verloop van de proeven&nbsp;»</b>, net onder de drie
       modules in je tuin.
     </p>
 
-    <table role="presentation" cellpadding="0" cellspacing="0" border="0" align="center" style="margin:0 auto 6px;">
-      <tr><td style="background:#1E7A46;border-radius:999px;">
+    <table role="presentation" cellpadding="0" cellspacing="0" border="0" align="center" style="border-collapse:collapse;margin:0 auto;">
+      <tr><td align="center" bgcolor="#1E7A46" style="background-color:#1E7A46;padding:15px 34px;">
         <a href="https://www.famiformation.com/quiz/mouscron"
-           style="display:inline-block;padding:15px 34px;font-size:17px;font-weight:bold;color:#ffffff;text-decoration:none;">
+           style="font-size:17px;line-height:20px;font-weight:bold;color:#ffffff;text-decoration:none;display:inline-block;">
           Ik ga ervoor&nbsp;🚀
         </a>
       </td></tr>
     </table>
 
-    <p style="font-size:15px;line-height:1.6;margin:18px 0 0;text-align:center;color:#617268;">
+    <p style="font-size:15px;line-height:24px;margin:18px 0 0;text-align:center;color:#617268;">
       Veel succes&nbsp;— en moge de beste tuinier winnen&nbsp;! 🌻
     </p>
 
   </td></tr>
 
   <!-- Pied -->
-  <tr><td style="background:#F3FAF5;padding:18px 24px;text-align:center;">
-    <div style="font-size:13px;line-height:1.6;color:#617268;">
+  <tr><td align="center" style="background-color:#F3FAF5;padding:18px 24px;">
+    <div style="font-size:13px;line-height:21px;color:#617268;">
       Une question&nbsp;? Écris à
       <a href="mailto:admin@famiformation.com" style="color:#1E7A46;">admin@famiformation.com</a><br>
       Een vraag&nbsp;? Mail naar
       <a href="mailto:admin@famiformation.com" style="color:#1E7A46;">admin@famiformation.com</a>
     </div>
-    <div style="font-size:13px;color:#8AA095;margin-top:10px;">
+    <div style="font-size:13px;line-height:20px;color:#8AA095;padding-top:10px;">
       L'équipe Famiflora&nbsp;·&nbsp;Famiformation&nbsp;—&nbsp;Mouscron 🌱
     </div>
   </td></tr>
 
 </table>
+<!--[if mso]></td></tr></table><![endif]-->
 
 </td></tr>
 </table>

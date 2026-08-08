@@ -277,18 +277,16 @@ function vueDonnees() {
           <td>${esc(SITES[l.site] || l.site || "—")}</td>
           <td>${l.motif === "podium" ? "🏆 Podium" : (l.motif === "jardin" ? "🌼 Jardin" : "—")}</td>
           <td class="rd-code">${esc(l.barcode || "")}</td>
-          <td><button class="rh-lien rd-lib" data-id="${esc(l.id)}">Libérer</button></td>
         </tr>`;
       }).join("")
-    : `<tr><td colspan="6" class="rd-vide">Aucun bon donné pour l'instant.</td></tr>`;
+    : `<tr><td colspan="5" class="rd-vide">Aucun bon donné pour l'instant.</td></tr>`;
   return `
     <div class="card">
       <table class="rd-tab">
-        <thead><tr><th>Quand</th><th>Qui</th><th>Magasin</th><th>Motif</th><th>Code</th><th></th></tr></thead>
+        <thead><tr><th>Quand</th><th>Qui</th><th>Magasin</th><th>Motif</th><th>Code</th></tr></thead>
         <tbody>${corps}</tbody>
       </table>
-    </div>
-    <p class="hint">« Libérer » remet le bon dans le stock et permet de renvoyer le mail à cette personne — c'est le seul moyen, un code déjà attribué bloquant tout second envoi.</p>`;
+    </div>`;
 }
 
 function rendre() {
@@ -309,12 +307,6 @@ function rendre() {
     $("#deco").addEventListener("click", () => { auth = null; localStorage.removeItem("fj_rh_auth"); vueLogin(); });
     document.querySelectorAll(".ong").forEach((b) => b.addEventListener("click", () => {
       onglet = b.dataset.ong; rendre();
-    }));
-    document.querySelectorAll(".rd-lib").forEach((b) => b.addEventListener("click", async () => {
-      if (!confirm("Remettre ce bon dans le stock ? La personne pourra de nouveau recevoir le mail.")) return;
-      const r = await post("rh_code_liberer", { id: b.dataset.id });
-      if (r.ok && r.data && r.data.ok) { await charger(); }
-      else { $("#msg").innerHTML = `<div class="msg err">Impossible de libérer ce bon.</div>`; }
     }));
     return;
   }
