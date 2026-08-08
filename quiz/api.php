@@ -2379,13 +2379,19 @@ function mailRecompense(PDO $db, $cle, $info, $modele = 'attente', $origine = 'a
   // code-barres : la plupart des clients mail bloquent les images distantes par
   // défaut, et un bon illisible ne sert à rien. La caisse peut donc le saisir à
   // la main si l'image ne s'affiche pas.
+  //
+  // 🍬 CE QUE LE BON DONNE est écrit noir sur blanc — une boîte Fun chez
+  // Lollyland, 5 €. Sans ça, la personne se présente en caisse sans savoir à
+  // quoi elle a droit, et c'est le comptoir qui doit l'expliquer à chaque fois.
   $blocCode = '';
   if (!empty($codeRecompense)) {
     $bar = (string) $codeRecompense['barcode'];
     $blocCode =
       '<div style="margin:24px 0;padding:20px;border:2px dashed #d6a21a;border-radius:14px;background:#fffbf0;text-align:center;">'
       . '<div style="font-size:13px;font-weight:bold;color:#8a6d1a;letter-spacing:.06em;text-transform:uppercase;">Ton bon cadeau</div>'
-      . '<div style="margin:12px 0 6px;"><img src="' . htmlspecialchars(recompenseUrlCodeBarre($bar), ENT_QUOTES, 'UTF-8')
+      . '<div style="margin:8px 0 4px;font-size:19px;font-weight:bold;color:#244230;">🍬 Une boîte Fun chez Lollyland</div>'
+      . '<div style="font-size:14px;color:#8a6d1a;">d\'une valeur de 5&nbsp;€, offerte par la maison</div>'
+      . '<div style="margin:14px 0 6px;"><img src="' . htmlspecialchars(recompenseUrlCodeBarre($bar), ENT_QUOTES, 'UTF-8')
       . '" alt="' . htmlspecialchars($bar, ENT_QUOTES, 'UTF-8') . '" width="300" style="max-width:100%;height:auto;"></div>'
       . '<div style="font-family:monospace;font-size:19px;font-weight:bold;color:#244230;letter-spacing:.04em;">'
       . htmlspecialchars($bar, ENT_QUOTES, 'UTF-8') . '</div>'
